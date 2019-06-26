@@ -1,0 +1,57 @@
+=======================================
+running last test with size 500
+stringify: 0.166ms
+deflate async: 0.850ms
+inflate async: 0.318ms
+deflate sync: 0.078ms
+inflate sync: 0.031ms
+=======================================
+running last test with size 1000
+stringify: 0.018ms
+deflate async: 0.185ms
+inflate async: 0.112ms
+deflate sync: 0.075ms
+inflate sync: 0.034ms
+=======================================
+running last test with size 2000
+stringify: 0.017ms
+deflate async: 0.157ms
+inflate async: 0.120ms
+deflate sync: 0.079ms
+inflate sync: 0.034ms
+=======================================
+running last test with size 4000
+stringify: 0.026ms
+deflate async: 0.218ms
+inflate async: 0.107ms
+deflate sync: 0.117ms
+inflate sync: 0.045ms
+=======================================
+running last test with size 8000
+stringify: 0.043ms
+deflate async: 0.312ms
+inflate async: 0.119ms
+deflate sync: 0.203ms
+inflate sync: 0.062ms
+=======================================
+running last test with size 16000
+stringify: 0.162ms
+deflate async: 0.611ms
+inflate async: 0.185ms
+deflate sync: 0.462ms
+inflate sync: 0.103ms
+=======================================
+running last test with size 32000
+stringify: 0.160ms
+deflate async: 1.271ms
+inflate async: 0.325ms
+deflate sync: 1.090ms
+inflate sync: 0.198ms
+=======================================
+running last test with size 64000
+stringify: 0.305ms
+deflate async: 3.063ms
+inflate async: 0.537ms
+deflate sync: 2.537ms
+inflate sync: 0.371ms
+done running all tests
