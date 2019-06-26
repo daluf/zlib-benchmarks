@@ -1,0 +1,20 @@
+{
+  "name": "zlib-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "threadpool_size_2": "UV_THREADPOOL_SIZE=2 node index.js > results/threadpool_size_2.txt",
+    "threadpool_size_4": "UV_THREADPOOL_SIZE=4 node index.js > results/threadpool_size_4.txt",
+    "threadpool_size_6": "UV_THREADPOOL_SIZE=6 node index.js > results/threadpool_size_6.txt",
+    "threadpool_size_8": "UV_THREADPOOL_SIZE=8 node index.js > results/threadpool_size_8.txt",
+    "run_all_tests": "npm run threadpool_size_2 && npm run threadpool_size_4 && npm run threadpool_size_6 && npm run threadpool_size_8"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.1.0"
+  }
+}
