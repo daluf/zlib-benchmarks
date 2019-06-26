@@ -1,4 +1,4 @@
-# zlib-benchmarks
+# zlib-testing
 
 ## Description
 This is a small script to test the time nodejs needs to JSON stringify and zlib deflate/inflate. Tests are ran with both async and sync style zlib commands.
