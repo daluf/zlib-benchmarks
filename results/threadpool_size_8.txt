@@ -1,57 +1,57 @@
 =======================================
 running last test with size 500
-stringify: 0.165ms
-deflate async: 0.693ms
-inflate async: 0.265ms
-deflate sync: 0.072ms
-inflate sync: 0.027ms
+99th percentile stringify: 0.023ms
+99th percentile deflate_async: 1.102ms
+99th percentile inflate_async: 0.316ms
+99th percentile deflate_sync: 0.171ms
+99th percentile inflate_sync: 0.067ms
 =======================================
 running last test with size 1000
-stringify: 0.018ms
-deflate async: 0.237ms
-inflate async: 0.133ms
-deflate sync: 0.069ms
-inflate sync: 0.031ms
+99th percentile stringify: 0.021ms
+99th percentile deflate_async: 0.392ms
+99th percentile inflate_async: 0.252ms
+99th percentile deflate_sync: 0.194ms
+99th percentile inflate_sync: 0.064ms
 =======================================
 running last test with size 2000
-stringify: 0.016ms
-deflate async: 0.152ms
-inflate async: 0.142ms
-deflate sync: 0.080ms
-inflate sync: 0.033ms
+99th percentile stringify: 0.028ms
+99th percentile deflate_async: 0.376ms
+99th percentile inflate_async: 0.235ms
+99th percentile deflate_sync: 0.175ms
+99th percentile inflate_sync: 0.065ms
 =======================================
 running last test with size 4000
-stringify: 0.024ms
-deflate async: 0.204ms
-inflate async: 0.126ms
-deflate sync: 0.112ms
-inflate sync: 0.041ms
+99th percentile stringify: 0.047ms
+99th percentile deflate_async: 0.524ms
+99th percentile inflate_async: 0.227ms
+99th percentile deflate_sync: 0.232ms
+99th percentile inflate_sync: 0.078ms
 =======================================
 running last test with size 8000
-stringify: 0.041ms
-deflate async: 0.340ms
-inflate async: 0.144ms
-deflate sync: 0.203ms
-inflate sync: 0.059ms
+99th percentile stringify: 0.082ms
+99th percentile deflate_async: 0.632ms
+99th percentile inflate_async: 0.258ms
+99th percentile deflate_sync: 0.394ms
+99th percentile inflate_sync: 0.113ms
 =======================================
 running last test with size 16000
-stringify: 0.075ms
-deflate async: 0.572ms
-inflate async: 0.228ms
-deflate sync: 0.431ms
-inflate sync: 0.095ms
+99th percentile stringify: 1.448ms
+99th percentile deflate_async: 1.029ms
+99th percentile inflate_async: 0.35ms
+99th percentile deflate_sync: 0.784ms
+99th percentile inflate_sync: 0.179ms
 =======================================
 running last test with size 32000
-stringify: 0.154ms
-deflate async: 1.294ms
-inflate async: 0.339ms
-deflate sync: 1.049ms
-inflate sync: 0.185ms
+99th percentile stringify: 0.3ms
+99th percentile deflate_async: 2.052ms
+99th percentile inflate_async: 0.577ms
+99th percentile deflate_sync: 2.275ms
+99th percentile inflate_sync: 0.353ms
 =======================================
 running last test with size 64000
-stringify: 0.286ms
-deflate async: 3.989ms
-inflate async: 0.836ms
-deflate sync: 3.133ms
-inflate sync: 0.510ms
+99th percentile stringify: 0.581ms
+99th percentile deflate_async: 4.564ms
+99th percentile inflate_async: 1.072ms
+99th percentile deflate_sync: 4.716ms
+99th percentile inflate_sync: 0.654ms
 done running all tests

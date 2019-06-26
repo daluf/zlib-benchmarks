@@ -1,5 +1,7 @@
 const async = require("async");
 const zlib = require("zlib");
+const performance = require("perf_hooks").performance;
+const percentile = require("percentile");
 
 function generateString(length) {
 	const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnoprqstuvwxyz0123456789";
@@ -12,7 +14,16 @@ function generateString(length) {
 	return string;
 }
 
+const times = {};
 function runTest(size, run, cb) {
+	if (run === 0) {
+		times[size] = {};
+		times[size].stringify = [];
+		times[size].deflate_async = [];
+		times[size].inflate_async = [];
+		times[size].deflate_sync = [];
+		times[size].inflate_sync = [];
+	}
 	const printLogs = run === runs - 1;
 	
 	printLogs ? console.log("=======================================") : ""
@@ -24,34 +35,50 @@ function runTest(size, run, cb) {
 		[key]: value
 	}
 	
-	printLogs ? console.time("stringify") : "";
+	const t_stringify = performance.now();
 	const stringified = JSON.stringify(json);
-	printLogs ? console.timeEnd("stringify") : "";
+	const t_stringify_end = performance.now();
 
-	printLogs ? console.time("deflate async") : "";
+	times[size].stringify.push(t_stringify_end - t_stringify);
+
+	printLogs ? console.log("99th percentile stringify:", Math.round(percentile(99, times[size].stringify) * 1000) / 1000 + "ms") : "";
+
+	const t_deflate_async = performance.now();
 	zlib.deflate(stringified, (err, buff) => {
 		if (err) {
 			cb(err);
 			return;
 		}
-		printLogs ? console.timeEnd("deflate async") : "";
+		const t_deflate_async_end = performance.now();
 
-		printLogs ? console.time("inflate async") : "";
+		times[size].deflate_async.push(t_deflate_async_end - t_deflate_async);
+		printLogs ? console.log("99th percentile deflate_async:", Math.round(percentile(99, times[size].deflate_async) * 1000) / 1000 + "ms") : "";
+		
+		const t_inflate_async = performance.now();
 		zlib.inflate(buff, (err, res) => {
 			if (err) {
 				cb(err);
 				return;
 			}
-			printLogs ? console.timeEnd("inflate async") : "";
+			const t_inflate_async_end = performance.now();
+
+			times[size].inflate_async.push(t_inflate_async_end - t_inflate_async);
+			printLogs ? console.log("99th percentile inflate_async:", Math.round(percentile(99, times[size].inflate_async) * 1000) / 1000 + "ms") : "";
 
 			try {
-				printLogs ? console.time("deflate sync") : "";
+				const t_deflate_sync = performance.now();
 				const deflated = zlib.deflateSync(stringified);
-				printLogs ? console.timeEnd("deflate sync", deflated) : "";
+				const t_deflate_sync_end = performance.now();
 
-				printLogs ? console.time("inflate sync") : "";
+				times[size].deflate_sync.push(t_deflate_sync_end - t_deflate_sync);
+				printLogs ? console.log("99th percentile deflate_sync:", Math.round(percentile(99, times[size].deflate_sync) * 1000) / 1000 + "ms") : "";
+				
+				const t_inflate_sync = performance.now();
 				const inflated = zlib.inflateSync(deflated);
-				printLogs ? console.timeEnd("inflate sync") : "";
+				const t_inflate_sync_end = performance.now();
+
+				times[size].inflate_sync.push(t_inflate_sync_end - t_inflate_sync);
+				printLogs ? console.log("99th percentile inflate_sync:", Math.round(percentile(99, times[size].inflate_sync) * 1000) / 1000 + "ms") : "";
 
 				cb();
 			} catch (err) {
@@ -61,7 +88,7 @@ function runTest(size, run, cb) {
 	});
 }
 
-const runs = 1000;
+const runs = 10000;
 runTests(runs);
 // [500, 1000, 2000, 4000, 8000, 16000, 32000, 64000]
 async function runTests(runs) {
