@@ -53,8 +53,8 @@ function runTest(size, run, cb) {
 	times[size].stringify.push(t_stringify_end - t_stringify);
 	printLogs ? console.log("99th percentile stringify:", Math.round(percentile(99, times[size].stringify) * 1000) / 1000 + "ms") : "";
 
-
-	try {
+	cb();
+	/* try {
 		const t_deflate_sync = performance.now();
 		const deflated = zlib.deflateSync(stringified);
 		const t_deflate_sync_end = performance.now();
@@ -72,7 +72,7 @@ function runTest(size, run, cb) {
 		cb();
 	} catch (err) {
 		cb(err);
-	}
+	} */
 }
 
 const runs = 10000;
@@ -80,7 +80,7 @@ runTests(runs);
 // [500, 1000, 2000, 4000, 8000, 16000, 32000, 64000]
 async function runTests(runs) {
 	async.timesLimit(runs, 1, (run, next) => {
-		async.eachLimit([500, 1000, 2000, 4000, 8000, 16000, 32000, 64000], 1, (n, cb) => {
+		async.parallelLimit([500, 1000, 2000, 4000, 8000, 16000, 32000, 64000], 4, (n, cb) => {
 			runTest(n, run, (err) => {
 				if (err) {
 					cb(err);
