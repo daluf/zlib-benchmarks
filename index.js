@@ -1,7 +1,6 @@
 const async = require("async");
 const zlib = require("zlib");
 const performance = require("perf_hooks").performance;
-const percentile = require("percentile");
 
 function generateString(length) {
 	const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnoprqstuvwxyz0123456789";
@@ -91,7 +90,7 @@ function runTestSync(size, cb) {
 	} 
 }
 
-const runs = 10000;
+const runs = 1000;
 runTests(runs);
 // [500, 1000, 2000, 4000, 8000, 16000, 32000, 64000]
 async function runTests(runs) {
@@ -156,11 +155,10 @@ async function runTests(runs) {
 			for (let i = 0; i < sizes.length; i++) {
 				console.log("==============================");
 				console.log("current size:", sizes[i]);
-				console.log("stringify:", percentile(99, times[sizes[i]].stringify) + "ms");
-				console.log("deflate async:", percentile(99, times[sizes[i]].deflate_async) + "ms");
-				console.log("inflate async:", percentile(99, times[sizes[i]].inflate_async) + "ms");
-				console.log("deflate sync:", percentile(99, times[sizes[i]].deflate_sync) + "ms");
-				console.log("inflate sync:", percentile(99, times[sizes[i]].inflate_sync) + "ms");
+				console.log("deflate async:", times[sizes[i]].deflate_async.reduce((a, b) => { return a + b; }) / (times[sizes[i]].deflate_async.length + 1) + "ms");
+				console.log("inflate async:", times[sizes[i]].inflate_async.reduce((a, b) => { return a + b; }) / (times[sizes[i]].inflate_async.length + 1) + "ms");
+				console.log("deflate sync:", times[sizes[i]].deflate_sync.reduce((a, b) => { return a + b; }) / (times[sizes[i]].deflate_sync.length + 1)+ "ms");
+				console.log("inflate sync:", times[sizes[i]].inflate_sync.reduce((a, b) => { return a + b; }) / (times[sizes[i]].inflate_sync.length + 1) + "ms");
 			}
 		});
 	});

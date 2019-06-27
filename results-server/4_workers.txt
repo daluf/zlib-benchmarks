@@ -1,0 +1,21 @@
+=======================ASYNC=======================
+Running 1m test @ http://localhost:3000/json
+  5 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     5.38ms    2.36ms  45.29ms   88.46%
+    Req/Sec   383.50     46.16   545.00     71.65%
+  114578 requests in 1.00m, 1.73GB read
+Requests/sec:   1908.26
+Transfer/sec:     29.50MB
+
+
+
+=======================SYNC========================
+Running 1m test @ http://localhost:3000/json
+  5 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     9.34ms    3.40ms  45.14ms   83.92%
+    Req/Sec   216.53     51.11   282.00     75.55%
+  64703 requests in 1.00m, 0.98GB read
+Requests/sec:   1077.72
+Transfer/sec:     16.66MB
